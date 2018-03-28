@@ -1,0 +1,32 @@
+version: "3"
+services:
+
+  wordpress:
+    image: cr0hn/wordpress-docker-sec
+    depends_on:
+      - mysql
+    environment:
+      WORDPRESS_DB_PASSWORD: my-secret-pw
+    volumes:
+      - wordpress:/var/www/html
+
+  nginx:
+    image: cr0hn/nginx-wordpress-docker-sec
+    depends_on:
+     - wordpress
+    volumes:
+     - wordpress:/var/www/html/
+    ports:
+     - "8080:80"
+    environment:
+      POST_MAX_SIZE: 128m
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_DATABASE: wordpress
+
+
+volumes:
+  wordpress:
