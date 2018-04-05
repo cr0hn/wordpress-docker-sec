@@ -27,7 +27,7 @@ version: "3"
 services:
 
   wordpress:
-    image: cr0hn/hardened-wordpress
+    image: cr0hn/wordpress-docker-sec
     depends_on:
       - mysql
     environment:
