@@ -2,7 +2,7 @@
 
 This repo only do a small hardening of Wordpress, **without change any internal functionality** of Wordpress.
 
-**The main goal is to disable hacking tools lik: WP-Scan or Plecost** 
+**The main goal is to disable hacking tools lik: WP-Scan or Plecost**
 
 ## Remove Metas && versions from statics
 
@@ -10,10 +10,10 @@ Followed this: https://tehnoblog.org/wordpress-security-how-to-hide-wordpress-me
 
 ## Changing default CSS / Javascript hashed
 
-Some security tools for Wordpress check .css / .js files, calculate a hash and can determinate the version of Wordpress from these files. 
+Some security tools for Wordpress check .css / .js files, calculate a hash and can determinate the version of Wordpress from these files.
 
 We change these files adding spaces at the ending of these files
-  
+
 # Examples
 
 
@@ -31,7 +31,11 @@ services:
     depends_on:
       - mysql
     environment:
-      WORDPRESS_DB_PASSWORD: my-secret-pw
+      - WORDPRESS_DB_USER=my-user
+      - WORDPRESS_DB_HOST=mysql
+      - WORDPRESS_DB_PASSWORD=my-secret-pw
+      - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_TABLE_PREFIX=mycustomprefix_
     volumes:
       - wordpress:/var/www/html
 
