@@ -22,4 +22,8 @@ rm -rf /tmp/already_exist.txt
 echo "[*] Removing versions from statics"
 change_statics_signature.sh
 
+# Remove PHP warnings
+echo "[*] Removing PHP Warnings"
+cat /etc/remove_php_warnings.txt >> /var/www/html/wp-config.php
+
 exec "$@"

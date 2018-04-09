@@ -1,6 +1,7 @@
 FROM wordpress:fpm
 
 COPY remove_metas_and_versions.txt /etc
+COPY remove_php_warnings.txt /etc
 COPY change_statics_signature.sh /usr/local/bin
 COPY hardenize-and-run.sh /usr/local/bin/
 

@@ -131,7 +131,9 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 			awk '/^\/\*.*stop editing.*\*\/$/ && c == 0 { c = 1; system("cat") } { print }' wp-config-sample.php > wp-config.php <<'EOPHP'
 // If we're behind a proxy server and using HTTPS, we need to alert Wordpress of that fact
 // see also http://codex.wordpress.org/Administration_Over_SSL#Using_a_Reverse_Proxy
-if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+if (isset($_SERVER['
+
+']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
 	$_SERVER['HTTPS'] = 'on';
 }
 
@@ -142,6 +144,8 @@ EOPHP
 		# see http://stackoverflow.com/a/2705678/433558
 		sed_escape_lhs() {
 			echo "$@" | sed -e 's/[]\/$*.^|[]/\\&/g'
+
+
 		}
 		sed_escape_rhs() {
 			echo "$@" | sed -e 's/[\/&]/\\&/g'

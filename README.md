@@ -8,6 +8,10 @@ This repo only do a small hardening of Wordpress, **without change any internal 
 
 Followed this: https://tehnoblog.org/wordpress-security-how-to-hide-wordpress-meta-generator-version-info/
 
+## Remove PHP Warnings and debug info
+
+Not only do security tasks, also configure the Wordpress site to suppress the PHP Warning & debug info to the website
+
 ## Changing default CSS / Javascript hashed
 
 Some security tools for Wordpress check .css / .js files, calculate a hash and can determinate the version of Wordpress from these files.
@@ -15,7 +19,6 @@ Some security tools for Wordpress check .css / .js files, calculate a hash and c
 We change these files adding spaces at the ending of these files
 
 # Examples
-
 
 This docker image must be complemented with the *nginx-wordpress-docker-sec* image, that you can find at: https://github.com/cr0hn/nginx-wordpress-docker-sec
 
