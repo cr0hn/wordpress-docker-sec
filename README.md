@@ -18,6 +18,10 @@ Some security tools for Wordpress check .css / .js files, calculate a hash and c
 
 We change these files adding spaces at the ending of these files
 
+## Memory limit
+
+Increased default Wordpress memory limit to 128M by default
+
 # Examples
 
 This docker image must be complemented with the *nginx-wordpress-docker-sec* image, that you can find at: https://github.com/cr0hn/nginx-wordpress-docker-sec
