@@ -27,6 +27,11 @@ echo "[*] Removing PHP Warnings"
 cat /etc/remove_php_warnings.txt >> /var/www/html/wp-config.php
 
 echo "[*] Increasing Wordpress memory limit to 128M"
-sed -i '2s/^/define( 'WP_MEMORY_LIMIT', '128M' );\n /' /var/www/html/wp-config.php
+
+ALREADY_MEMORY_LIMIT = $(grep "WP_MEMORY_LIMIT" /var/www/html/wp-config.php)
+
+if [ "$A" == "" ]; then
+    sed -i '2s/^/define( \"WP_MEMORY_LIMIT\", \"128M\" );\n /' /var/www/html/wp-config.php
+fi
 
 exec "$@"
