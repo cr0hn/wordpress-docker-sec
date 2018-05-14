@@ -24,13 +24,16 @@ change_statics_signature.sh
 
 # Remove PHP warnings
 echo "[*] Removing PHP Warnings"
-cat /etc/remove_php_warnings.txt >> /var/www/html/wp-config.php
+DEBUG_ENABLED = $(grep "WP_DEBUG_DISPLAY" /var/www/html/wp-config.php)
+
+if [ "$DEBUG_ENABLED" == "" ]; then
+    cat /etc/remove_php_warnings.txt >> /var/www/html/wp-config.php
+fi
 
 echo "[*] Increasing Wordpress memory limit to 128M"
-
 ALREADY_MEMORY_LIMIT = $(grep "WP_MEMORY_LIMIT" /var/www/html/wp-config.php)
 
-if [ "$A" == "" ]; then
+if [ "$ALREADY_MEMORY_LIMIT" == "" ]; then
     sed -i '2s/^/define( \"WP_MEMORY_LIMIT\", \"128M\" );\n /' /var/www/html/wp-config.php
 fi
 
