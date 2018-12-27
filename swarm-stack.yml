@@ -1,0 +1,79 @@
+version: "3.7"
+services:
+
+  wordpress:
+    image: cr0hn/wordpress-docker-sec
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - mysql
+    environment:
+      WORDPRESS_DB_PASSWORD: my-secret-pw
+    volumes:
+      - wordpress-data:/var/www/html
+    networks:
+      - mariadb-net
+      - nginx-net
+      - redis-net
+
+  nginx:
+    image: cr0hn/nginx-wordpress-docker-sec
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      update_config:
+        parallelism: 2
+        delay: 10s
+    depends_on:
+     - wordpress
+    volumes:
+     - wordpress-data:/var/www/html/
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+    environment:
+      POST_MAX_SIZE: 128m
+    networks:
+      - nginx-net
+
+  redis:
+    image: redis:alpine
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    networks:
+      - redis-net
+    volumes:
+      - redis-data:/data
+
+  mysql:
+    image: mariadb:10.2-bionic
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_DATABASE: wordpress
+    networks:
+      - mariadb-net
+    volumes:
+      - mariadb-data:/var/lib/mysql
+
+volumes:
+  wordpress-data:
+  redis-data:
+  mariadb-data:
+
+networks:
+  mariadb-net:
+    driver: overlay
+  nginx-net:
+    driver: overlay
+  redis-net:
+    driver: overlay

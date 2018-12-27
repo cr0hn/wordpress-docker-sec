@@ -12,5 +12,9 @@ COPY hardenize-and-run.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/change_statics_signature.sh
 RUN chmod +x /usr/local/bin/hardenize-and-run.sh
 
+# Install wp admin tool
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+    chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
+
 ENTRYPOINT ["hardenize-and-run.sh"]
 CMD ["php-fpm"]
