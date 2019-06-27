@@ -11,6 +11,9 @@ services:
       - mysql
     environment:
       WORDPRESS_DB_PASSWORD: my-secret-pw
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: root
     volumes:
       - wordpress-data:/var/www/html
     networks:
