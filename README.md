@@ -4,6 +4,10 @@ This repo only do a small hardening of Wordpress, **without change any internal 
 
 **The main goal is to disable hacking tools lik: WP-Scan or Plecost**
 
+# Support this project
+
+Support this project (to solve issues, new features...) by applying the Github "Sponsor" button.
+
 ## Remove Metas && versions from statics
 
 Followed this: https://tehnoblog.org/wordpress-security-how-to-hide-wordpress-meta-generator-version-info/
